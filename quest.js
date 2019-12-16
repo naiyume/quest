@@ -16,7 +16,7 @@ quest.render = txt => {
     txt = txt.split(/\n\n/).map(qq => {
         qq = qq.split("\n");
         if (qq.length > 1) {
-            html += `<div><b>${qq[0]}</b><br>`;
+            html += `<div>${qq[0]}`;
             qq.slice(1).forEach(q => {
                 html += `<p>${q}</p>`;
             });
@@ -35,8 +35,8 @@ quest.render = txt => {
         // replace [text box:xxx] with a textbox
         z = z.replace(/\[text\s?box:?(\w+)?\]/g, "<textbox name='$1'>")
 
-        // replace (XX) with a radio box...
-        z = z.replace(/\((\w+)\)([^<\n]*)/g, "<input type='radio' name='" + y + "' value='$1' id='" + y + "_$1'></input><label for='" + y + "_$1'>$2</label>");
+        // replace (XX) with a radio button...
+        z = z.replace(/\((\w*)\)([^<\n]*)/g, "<input type='radio' name='" + y + "' value='$1' id='" + y + "_$1'></input><label for='" + y + "_$1'>$2</label>");
 
         // replace [a-zXX] with a checkbox box...
         z = z.replace(/\[(\w*)\]([^<\n]*)/g, "<input type='checkbox' name='" + y + "' value='$1' id='" + y + "_$1'></input><label for='" + y + "_$1'>$2</label>");
@@ -70,7 +70,7 @@ quest.render = txt => {
     // add the HTML/HEAD/BODY tags...
     html = '<html><head><link rel="stylesheet" type="text/css" href="Questionnaire.css"></head><body>' + html + '\n<script src="questionnaire.js"></script></body>';
 
-    console.log("\n\n\n" + html);
+    // console.log("\n\n\n" + html);
 
     // ---- html elements ---- //
 
