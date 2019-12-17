@@ -73,7 +73,7 @@ function transform(contents) {
 
 
     // add the HTML/HEAD/BODY tags...
-    return contents = '<html><head></head><body>' + contents + '\n<script src="questionnaire.js"></script></body>';
+    return contents = '<html><head><link rel="stylesheet" type="text/css" href="Questionnaire.css"></head><body>' + contents + '\n<script src="questionnaire.js"></script></body>';
 
     console.log("\n\n\n" + contents);
 }
