@@ -54,6 +54,10 @@ label {
   padding-bottom: 3px !important;
 }
 
+.navbar-toggler {
+  background-color: #24305e;
+}
+
 @media only screen and (max-width: 768px) {
   [id="ta"] {
     width: 350px !important;
@@ -81,5 +85,9 @@ label {
 
   [id="renderText"] {
     margin-top: 15px;
+  }
+
+  [class="navbar-toggler"] {
+    float: right;
   }
 }
