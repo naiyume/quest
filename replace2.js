@@ -19,7 +19,6 @@ export let transform = function () {
 const validation = {};
 let questName = "Questionnaire";
 
-
 transform.render = async (obj, divId, previousResults = {}) => {
   moduleParams.renderObj = obj;
   moduleParams.previousResults = previousResults;
@@ -82,7 +81,7 @@ transform.render = async (obj, divId, previousResults = {}) => {
     "\\[([A-Z_][A-Z0-9_#]*[\\?\\!]?)(?:\\|([^,\\|\\]]+)\\|)?(,.*?)?\\](.*?)(?=$|\\[[_A-Z]|<form)",
     "g"
   );
-
+  let questionCount = 1;
   // because firefox cannot handle the "s" tag, encode all newlines
   // as a unit seperator ASCII code 1f (decimal: 31)
   contents = contents.replace(/\n/g, "\u001f");
@@ -105,6 +104,8 @@ transform.render = async (obj, divId, previousResults = {}) => {
       return t;
     });
 
+    //console.log("questID === " + questionCount, questID);
+    questionCount++;
     //handle options for question
     questOpts = questOpts ? questOpts : "";
 
@@ -798,6 +799,7 @@ transform.render = async (obj, divId, previousResults = {}) => {
   moduleParams.questName = questName;
   return true;
 };
+
 
 function unrollLoops(txt) {
   // all the questions in the loops...

@@ -3,32 +3,48 @@ import { questionQueue, moduleParams } from "./questionnaire.js";
 
 let prevRes = {};
 
-async function startUp() {
+
+function startUp() {
   var ta = document.getElementById("ta");
+
   ta.onkeyup = (ev) => {
+    var d = new Date();
+    var startTime = d.getTime();
+    console.log("Start Time = ", startTime);
+   
     transform.tout((previousResults) => {
+      // <-- this is where quest.js is engaged
       transform.render(
         {
           text: ta.value,
         },
         "rendering",
         previousResults
-      ); // <-- this is where quest.js is engaged
+      ).then((value) => {
+        console.log(value);
+        // expected output: "Success!"
+      });
       // transform.render({url: 'https://jonasalmeida.github.io/privatequest/demo2.txt&run'}, 'rendering') // <-- this is where quest.js is engaged
       if (document.querySelector(".question") != null) {
         document.querySelector(".question").classList.add("active");
       }
+
+      d = new Date();
+      var endTime = d.getTime();
+      console.log("Tout End Time = ", endTime);
+      console.log("Total Load Time = ", endTime - startTime);
     });
+
   };
 
   ta.innerHTML = "// type, paste, or upload questionnaire markup\n\n";
   var q = (location.search + location.hash).replace(/[\#\?]/g, "");
   if (q.length > 3) {
     if (!q.startsWith("config")) {
-      ta.value = await (await fetch(q.split("&")[0])).text(); // getting the first of markup&css
+      //ta.value = await (await fetch(q.split("&")[0])).text(); // getting the first of markup&css
     } else {
       moduleParams.config = config;
-      ta.value = await (await fetch(config.markdown)).text();
+      //ta.value = await (await fetch(config.markdown)).text();
     }
     ta.onkeyup();
   }

@@ -91,7 +91,14 @@
             </script> -->
             <div class="col">
                 <h3 id="renderText" style="color: navy;">Rendering</h3>
-                <div id="rendering" ></div>
+                    <!-- Progress bar HTML -->
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" style="min-width: 20px;"></div>
+                    </div>
+
+                <div id="rendering" >
+
+                    Loading...</div>
             </div>
         </div>
     </div>
@@ -100,6 +107,16 @@
         function changeStyle(sheet) {
             document.getElementById("pagestyle").setAttribute("href", sheet)
         }
+        var i = 0;
+        function makeProgress(){
+            if(i < 100){
+                i = i + 1;
+                $(".progress-bar").css("width", i + "%").text(i + " %");
+            }
+            // Wait for sometime before running this script again
+            setTimeout("makeProgress()", 100);
+        }
+        makeProgress();
     </script>
 
     <script>
